@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
+.container {
+  width: 600px;
+  height: 500px;
+  margin-inline: auto;
+  margin-top: 10px;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+.item {
+  background-color: rgba(0, 0, 255, 0.7);
+  border: 1px solid black;
+  font-size: 100px;
+  text-align: center;
+  color: white;
+}
+.planning {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  background-color: rgba(0, 0, 255, 0.5);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  width: 100px;
+  height: 50px;
+}
+.congratulations {
+  margin-top: 50px;
+  width: 100%;
+  height: 10%;
+  font-size: 50px;
+  font-weight: bold;
+  color: rgba(0, 0, 255, 0.5);
+  text-align: center;
+}
+.form {
+  background-color: rgb(120, 120, 233);
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  border: none;
+  border-radius: 10px;
+  left: 50%;
+  scale: 0;
+}
+form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+input {
+  width: 150px;
+  outline: none;
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+}
+input[type="submit"] {
+  background-color: rgba(137, 43, 226, 0.3);
+  color: white;
+}
