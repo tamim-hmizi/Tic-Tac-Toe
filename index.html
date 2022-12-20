@@ -15,11 +15,20 @@
       <button class="settings btn">Settings</button>
     </div>
     <div class="form">
-        <form action="" method="">
-            <input type="text" name="player1" placeholder="X player name">
-            <input type="text" name="player2" placeholder="O player name">
-            <input type="submit" value="submit">
-        </form>
+      <form action="" method="">
+        <input type="text" name="player1" placeholder="X player name" />
+        <div class="checkbox">
+          <input type="checkbox" name="player1AI" id="player1AI" />
+          <label for="player1AI">player 1 to AI</label>
+        </div>
+        <input type="text" name="player2" placeholder="O player name" />
+        <div class="checkbox">
+          <input type="checkbox" name="player2AI" id="player2AI" />
+          <label for="player2AI">player 2 to AI</label>
+        </div>
+
+        <input type="submit" value="submit" />
+      </form>
     </div>
     <div class="container">
       <button class="item"></button>

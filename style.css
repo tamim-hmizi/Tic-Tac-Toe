@@ -66,7 +66,7 @@ form {
   justify-content: space-evenly;
   align-items: center;
 }
-input {
+input[type="text"] {
   width: 150px;
   outline: none;
   border: none;
@@ -75,5 +75,15 @@ input {
 }
 input[type="submit"] {
   background-color: rgba(137, 43, 226, 0.3);
+  color: white;
+  width: 150px;
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+}
+input[type="checkbox"] {
+  accent-color: rgba(137, 43, 226, 0.3);
+}
+.checkbox{
   color: white;
 }
