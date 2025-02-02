@@ -4,8 +4,8 @@ const restartbtn = document.querySelector(".restart");
 const settingbtn = document.querySelector(".settings");
 const formcontainer = document.querySelector(".form");
 const form = document.querySelector("form");
-const player1AI = document.querySelector('input[name="player1AI"');
-const player2AI = document.querySelector('input[name="player2AI"');
+const player1AI = document.querySelector('input[name="player1AI"]');
+const player2AI = document.querySelector('input[name="player2AI"]');
 const player1input = document.querySelector('input[name="player1"]');
 const player2input = document.querySelector('input[name="player2"]');
 
@@ -18,7 +18,9 @@ const Gameboard = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
 
   const render = () => {
-    for (let i = 0; i < items.length; i += 1) items[i].textContent = board[i];
+    for (let i = 0; i < items.length; i += 1) {
+      items[i].textContent = board[i];
+    }
   };
 
   const addToBoard = (index, mark) => {
@@ -26,7 +28,9 @@ const Gameboard = (() => {
   };
 
   const gameOver = () => {
-    for (let i = 0; i < board.length; i += 1) if (board[i] === "") return false;
+    for (let i = 0; i < board.length; i += 1) {
+      if (board[i] === "") return false;
+    }
     return true;
   };
 
@@ -57,14 +61,15 @@ const Gameboard = (() => {
         return player2.name;
     }
     if (gameOver()) return "draw";
-
     return null;
   };
+
   const clearBoard = () => {
     for (let i = 0; i < board.length; i += 1) {
       board[i] = "";
     }
   };
+
   const AIrandom = () => {
     let index = -1;
     let random;
@@ -82,30 +87,33 @@ const flow = (() => {
   const stopEvent = () => {
     items.forEach((item) => item.setAttribute("disabled", "true"));
   };
+
   const startEvent = () => {
     items.forEach((item) => item.removeAttribute("disabled"));
   };
+
   const congratulations = (name) => {
     const div = document.createElement("div");
     div.classList.add("congratulations");
-    if (name !== "draw") div.textContent = `${name} is the winner !`;
-    else div.textContent = "It's a Draw !";
+    if (name !== "draw") div.textContent = `${name} is the winner!`;
+    else div.textContent = "It's a Draw!";
     body.appendChild(div);
   };
+
   const restart = () => {
     restartbtn.addEventListener("click", () => {
-      if (body.lastChild.classList.contains("congratulations")) {
-        body.removeChild(body.lastChild);
-        items.forEach((item) => item.removeAttribute("disabled"));
-      }
-
-      for (let i = 0; i < items.length; i += 1) {
-        items[i].textContent = "";
-      }
+      // Reset game state
+      Gameboard.clearBoard();
+      Gameboard.render();
       player1.turn = true;
       player2.turn = false;
-      Gameboard.clearBoard();
-      if (player1.AI === true && player1.turn === true) {
+      // eslint-disable-next-line no-return-assign, no-param-reassign
+      items.forEach((item) => (item.textContent = ""));
+      const existingMessage = document.querySelector(".congratulations");
+      if (existingMessage) body.removeChild(existingMessage);
+      startEvent();
+
+      if (player1.AI && player1.turn) {
         Gameboard.addToBoard(Gameboard.AIrandom(), player1.mark);
         Gameboard.render();
         player1.turn = false;
@@ -126,7 +134,7 @@ const flow = (() => {
           Gameboard.render();
           player1.turn = false;
           player2.turn = true;
-          if (player2.turn === true && player2.AI === true) {
+          if (player2.turn && player2.AI) {
             Gameboard.addToBoard(Gameboard.AIrandom(), player2.mark);
             Gameboard.render();
             player1.turn = true;
@@ -146,7 +154,7 @@ const flow = (() => {
           Gameboard.render();
           player1.turn = true;
           player2.turn = false;
-          if (player1.turn === true && player1.AI === true) {
+          if (player1.turn && player1.AI) {
             Gameboard.addToBoard(Gameboard.AIrandom(), player1.mark);
             Gameboard.render();
             player1.turn = false;
@@ -160,6 +168,7 @@ const flow = (() => {
       });
     }
   };
+
   const AISettings = () => {
     player1AI.addEventListener("click", () => {
       if (player1AI.checked) {
@@ -175,6 +184,7 @@ const flow = (() => {
         player1.AI = false;
       }
     });
+
     player2AI.addEventListener("click", () => {
       if (player2AI.checked) {
         player2input.value = "";
@@ -190,9 +200,10 @@ const flow = (() => {
       }
     });
   };
+
   const setting = () => {
     settingbtn.addEventListener("click", () => {
-      formcontainer.style.scale = 1;
+      formcontainer.classList.add("active");
       AISettings();
       stopEvent();
     });
@@ -203,12 +214,11 @@ const flow = (() => {
       e.preventDefault();
       if (e.srcElement[0].value !== "") player1.name = e.srcElement[0].value;
       if (e.srcElement[2].value !== "") player2.name = e.srcElement[2].value;
-      formcontainer.style.scale = 0;
-      e.srcElement[0].value = "";
-      e.srcElement[2].value = "";
+      formcontainer.classList.remove("active");
       restartbtn.click();
       startEvent();
-      if (player1.AI === true && player1.turn === true) {
+      // If Player 1 is AI and it's their turn, make the AI play
+      if (player1.AI && player1.turn) {
         Gameboard.addToBoard(Gameboard.AIrandom(), player1.mark);
         Gameboard.render();
         player1.turn = false;
@@ -216,6 +226,7 @@ const flow = (() => {
       }
     });
   };
+
   return { play, restart, setting, submit };
 })();
 
