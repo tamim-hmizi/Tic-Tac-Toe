@@ -217,7 +217,7 @@ const flow = (() => {
       formcontainer.classList.remove("active");
       restartbtn.click();
       startEvent();
-      // If Player 1 is AI and it's their turn, make the AI play
+      
       if (player1.AI && player1.turn) {
         Gameboard.addToBoard(Gameboard.AIrandom(), player1.mark);
         Gameboard.render();

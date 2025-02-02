@@ -8,11 +8,15 @@
 body {
   width: 100vw;
   height: 100vh;
-  background-color: #f0f4f8;
+  background: linear-gradient(135deg, rgba(100, 100, 255, 0.712), rgba(255, 255, 255, 0.493));
+  background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
 }
 
 .container {
@@ -31,6 +35,7 @@ body {
   color: white;
   transition: background-color 0.3s ease, transform 0.3s ease;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .item:hover {
@@ -71,7 +76,7 @@ body {
 }
 
 .form {
-  background-color: rgb(120, 120, 233);
+  background-color: rgba(120, 120, 233, 0.7); /* Slight transparency for glassy look */
   position: absolute;
   width: 300px;
   height: 250px;
@@ -86,7 +91,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  z-index: 100; /* Make sure the modal is above other content */
+  z-index: 100; 
 }
 
 .form.active {
